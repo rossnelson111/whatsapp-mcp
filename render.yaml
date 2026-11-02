@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: whatsapp-mcp
+    runtime: docker
+    region: frankfurt
+    plan: 0.5c-512mb
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    envVars:
+      - key: ACCESS_KEY
+        sync: false
+      - key: FULL_HISTORY
+        value: "true"
+    disk:
+      name: whatsapp-data
+      mountPath: /data
+      sizeGB: 1
